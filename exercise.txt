@@ -1,0 +1,43 @@
+Exercise
+
+Need to be in a blank github codespace at the command line to run this exercise.
+
+--------- Basic Linux commands -------------------------------------------------------------------------------------------------
+Command	                        What it’s doing
+--------------------------------------------------------------------------------------------------------------------------------
+pwd	                            Print working directory you’re in
+whoami	                        See your username
+cd /	                        Change directory to the root (top level) directory
+ls	                            List contents of current directory
+cd workspaces	                Change directory to ‘workspaces’ 
+ls -lath	                    List contents with details
+cd codespaces-blank	            Change to /workspaces/codespaces-blank directory
+cd ..	                        Change directory to one level up
+cd -	                        Change directory to where you were last
+cd linux_docker_exercise/	    Change directory to exercise folder
+
+
+
+-------------------------- Docker commands -------------------------------------------------------------------------------------
+Command	                                                What it’s doing
+--------------------------------------------------------------------------------------------------------------------------------
+docker ps	                                            Check status of running containers
+docker images	                                        Check what images are downloaded
+docker run hello-world	                                Run a test container to make sure docker is working
+docker run -it ubuntu bash	                            Run ubuntu container and go to command line
+whoami	                                                See your username (should be different since you're inside a container)
+docker ps                                               Check status of running containers (does it work inside a container?)
+CTL+C	                                                Exit out of container command line and go back to codespace command line
+docker ps -a	                                        Check status of all containers (running and stopped)
+docker rm (name)	                                    Remove container by name
+docker pull rocker/tidyverse:4.3.1	                    Pull image rocker/tidyverse:4.3.1 from docker hub
+docker run -p 8787:8787 rocker/tidyverse:4.3.1	        Run tidyverse container on port 8787
+docker run -dit -p 9000:8787 -v /workspaces/codespaces-blank:/home/rstudio --name rstudio1 -e PASSWORD=test rocker/tidyverse:4.3.1	    Run tidyverse container with lots of options: port 9000, connect files to container, name it rstudio1, set a password
+bash docker/rstudio-run.sh -h	                        Look at options for running custom rstudio workspace container
+bash docker/rstudio-run.sh 	                            Run rstudio workspace container
+bash docker/jupyterlab-run.sh -h	                    Look at options for running custom rstudio workspace container
+bash docker/jupyterlab-run.sh	                        Run rstudio workspace container
+docker ps -a	                                        Check status of all containers (running and stopped)
+docker stop $(docker ps -aq)	                        Stop all docker containers
+docker rm $(docker ps -aq)	                            Remove all docker containers
+
