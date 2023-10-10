@@ -24,7 +24,7 @@ Help()
 port=`shuf -i 7000-8000 -n 1`
 remove=false
 tag="4.3.1"
-password="nimble"
+password="test"
 
 # Flags for assigning port, name, and password
 while [ $# -gt 0 ] ; do
@@ -44,19 +44,10 @@ done
 # Set name 
 name="rstudio-${port}"
 
-# Check for valid tag name and set username
-if [ $tag = '4.0.1' ] || [ $tag = '4.0.1a' ]
-    then
-      export username="rstudio"
-      export mount='/mnt/data_science:/home/rstudio/data_science'
-  elif [ $tag = '4.3.1' ]
-    then 
-      export username="root"
-      export mount='/mnt/data_science:/root/data_science'
-  else
-    echo "Invalid image tag. Choose one of 4.0.1, 4.0.1a or 4.3.1"
-    exit 1
-fi
+
+# Set mount point
+export username="rstudio"
+export mount='/workspaces/codespaces-blank:/home/rstudio/'
 
 
 

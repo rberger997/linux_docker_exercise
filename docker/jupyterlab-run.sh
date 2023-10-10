@@ -24,7 +24,7 @@ Help()
 port=`shuf -i 7000-8000 -n 1`
 remove=false
 tag="2023-08a"
-password="nimble"
+password="test"
 
 
 # Flags for assigning port, name, and password
@@ -77,7 +77,7 @@ docker run --name $name -d \
 	-e JUPYTER_TOKEN=$password \
   -e GRANT_SUDO=yes \
   --user root \
-	-v /mnt/data_science:/home/jovyan/data_science \
+	-v /workspaces/codespaces-blank:/home/jovyan \
   -v /usr/share/zoneinfo/America/Detroit:/etc/localtime \
 	-t docker.io/rberger997/jupyterlab:$tag
 
