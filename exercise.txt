@@ -15,8 +15,12 @@ cd codespaces-blank	            Change to /workspaces/codespaces-blank directory
 cd ..	                        Change directory to one level up
 cd -	                        Change directory to where you were last
 cd linux_docker_exercise/	    Change directory to exercise folder
+CTL+C	                        Cancel/escape button for the linux command line
 
 
+
+**Note: Make sure to change the directory to the linux_docker_exercise folder first (some commands won't work if you don't) 
+cd /workspaces/codespaces-blank/linux_docker_exercise
 
 -------------------------- Docker commands -------------------------------------------------------------------------------------
 Command	                                                What it’s doing
@@ -32,7 +36,8 @@ docker ps -a	                                        Check status of all contain
 docker rm (name)	                                    Remove container by name
 docker pull rocker/tidyverse:4.3.1	                    Pull image rocker/tidyverse:4.3.1 from docker hub
 docker run -p 8787:8787 rocker/tidyverse:4.3.1	        Run tidyverse container on port 8787
-docker run -dit -p 9000:8787 -v /workspaces/codespaces-blank:/home/rstudio --name rstudio1 -e PASSWORD=test rocker/tidyverse:4.3.1	    Run tidyverse container with lots of options: port 9000, connect files to container, name it rstudio1, set a password
+docker run -dit -p 9000:8787 -v /workspaces/codespaces-blank:/home/rstudio --name rstudio1 -e PASSWORD=test rocker/tidyverse:4.3.1	    
+                                                        Run tidyverse container with lots of options: port 9000, connect files to container, name it rstudio1, set a password
 bash docker/rstudio-run.sh -h	                        Look at options for running custom rstudio workspace container
 bash docker/rstudio-run.sh 	                            Run rstudio workspace container
 bash docker/jupyterlab-run.sh -h	                    Look at options for running custom rstudio workspace container
