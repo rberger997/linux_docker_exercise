@@ -14,35 +14,56 @@ ls -lath	                    List contents with details
 cd codespaces-blank	            Change to /workspaces/codespaces-blank directory
 cd ..	                        Change directory to one level up
 cd -	                        Change directory to where you were last
+cd codespaces-blank	            Change directory to /workspaces/codespaces-blank
 cd linux_docker_exercise/	    Change directory to exercise folder
 CTL+C	                        Cancel/escape button for the linux command line
 
 
 
-**Note: Make sure to change the directory to the linux_docker_exercise folder first (some commands won't work if you don't) 
-cd /workspaces/codespaces-blank/linux_docker_exercise
-
--------------------------- Docker commands -------------------------------------------------------------------------------------
+-------------------------- Docker ----------------------------------------------------------------------------------------------
 Command	                                                What it’s doing
 --------------------------------------------------------------------------------------------------------------------------------
+----------- Play with containers
 docker ps	                                            Check status of running containers
 docker images	                                        Check what images are downloaded
 docker run hello-world	                                Run a test container to make sure docker is working
-docker run -it ubuntu bash	                            Run ubuntu container and go to command line
+docker pull ubuntu:latest                               Pull the ubuntu:latest image from docker hub
+docker images	                                        Check what images are downloaded
+docker run -dit --name box1 ubuntu                      Run a container named box1 from the ubuntu image
+docker ps	                                            Check status of running containers
+docker stop box1                                        Stop container box1
+docker ps -a	                                        Check status of all containers (running and stopped)
+docker start box1                                       Start container box1
+docker ps	                                            Check status of running containers
+docker exec -it box1 bash                               Go to the command line of running container box1
 whoami	                                                See your username (should be different since you're inside a container)
 docker ps                                               Check status of running containers (does it work inside a container?)
-CTL+C	                                                Exit out of container command line and go back to codespace command line
+exit	                                                Exit out of container command line and go back to codespace command line
+docker run -dit --name box2 ubuntu                      Run a container named box2 from the ubuntu image
+docker stop box1 box2                                   Stop containers box1 and box2
 docker ps -a	                                        Check status of all containers (running and stopped)
-docker rm (name)	                                    Remove container by name
+docker rm box1 box2                                     Remove containers box1 and box2 by name (has to be stopped to work)
+docker ps -a	                                        Check status of all containers (running and stopped)
+docker rmi ubuntu:latest                                Remove image ubuntu:latest from your computer
+docker images	                                        Check what images are downloaded
+
+-------- Pull and run rstudio container                                    
 docker pull rocker/tidyverse:4.3.1	                    Pull image rocker/tidyverse:4.3.1 from docker hub
-docker run -p 8787:8787 rocker/tidyverse:4.3.1	        Run tidyverse container on port 8787
-docker run -dit -p 9000:8787 -v /workspaces/codespaces-blank:/home/rstudio --name rstudio1 -e PASSWORD=test rocker/tidyverse:4.3.1	    
-                                                        Run tidyverse container with lots of options: port 9000, connect files to container, name it rstudio1, set a password
+docker images                                           Check what images are downloaded
+docker run -dit -p 6000:8787 -v /workspaces/codespaces-blank:/home/rstudio --name rstudio1 -e PASSWORD=test rocker/tidyverse:4.3.1	    
+                                                        Run tidyverse container with lots of options: port 6000, connect files to container, name it rstudio1, set a password
+docker stop rstudio1
+docker ps -a
+docker rm rstudio1
+docker ps -a
+
+-------- If there's time: run rstudio and jupyterlab containers (takes a long time to pull from dockerhub)
 bash docker/rstudio-run.sh -h	                        Look at options for running custom rstudio workspace container
-bash docker/rstudio-run.sh 	                            Run rstudio workspace container
-bash docker/jupyterlab-run.sh -h	                    Look at options for running custom rstudio workspace container
-bash docker/jupyterlab-run.sh	                        Run rstudio workspace container
+bash docker/rstudio-run.sh -p 6001	                    Run rstudio workspace container on port 6001
+bash docker/jupyterlab-run.sh -h	                    Look at options for running custom jupyterlab workspace container
+bash docker/jupyterlab-run.sh -p 6002	                Run jupyterlab workspace container on port 6002
+
+-------- Clean up containers
 docker ps -a	                                        Check status of all containers (running and stopped)
 docker stop $(docker ps -aq)	                        Stop all docker containers
 docker rm $(docker ps -aq)	                            Remove all docker containers
-
